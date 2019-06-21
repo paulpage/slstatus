@@ -40,7 +40,7 @@ slstatus: slstatus.o $(COM:=.o) $(REQ:=.o)
 	$(CC) -o $@ $(LDFLAGS) $(COM:=.o) $(REQ:=.o) slstatus.o $(LDLIBS)
 
 clean:
-	rm -f slstatus slstatus.o $(COM:=.o) $(REQ:=.o)
+	rm -f slstatus slstatus.o $(COM:=.o) $(REQ:=.o) config.h
 
 dist:
 	rm -rf "slstatus-$(VERSION)"
@@ -62,3 +62,14 @@ install: all
 uninstall:
 	rm -f "$(DESTDIR)$(PREFIX)/bin/slstatus"
 	rm -f "$(DESTDIR)$(MANPREFIX)/man1/slstatus.1"
+
+laptop: laptop_copy slstatus
+
+desktop: desktop_copy slstatus
+
+laptop_copy:
+	cp -f laptop.h config.h
+
+desktop_copy:
+	cp -f desktop.h config.h
+
